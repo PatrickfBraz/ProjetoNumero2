@@ -2,10 +2,13 @@
   "storage": {
     "dataExtension": "JSON | CSV",
     "encoding": "utf-8",
-    "s3Interface": {
+    "remote": false,
+    "localPath": "/tmp/",
+    "s3": {
+      "bucket": "",
+      "key": "",
       "acessKey": "",
       "secretKey": "",
-      "fileName": "",
       "acessDenyConfig": {
         "saveLocal": true,
         "path": "/tmp/"
@@ -17,21 +20,11 @@
     "storage": {
       "active": false,
       "local": {
-        "active": false,
         "path": "/tmp/"
-      },
-      "remote": {
-        "active": false,
-        "interface": {
-          "s3Interface": {
-            "bucket": "",
-            "key": ""
-          }
-        }
       }
     },
     "format": "",
-    "level": ""
+    "level": "INFO"
   },
   "scraper": {
     "requestTimeout": 30,
