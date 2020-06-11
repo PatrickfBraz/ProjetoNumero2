@@ -1,5 +1,9 @@
+"""
+Este modulo possui a classe responsável pela leitura em tempo de execução das configurações passadas pelo usuário.
+"""
 import os
 import json
+from src.error.error_types import ExecutionConfigurationLoadError
 
 
 class ConfigLoader:
@@ -23,9 +27,9 @@ class ConfigLoader:
 
         # todo importar modulo de tratamento de erros
         except AssertionError as assert_error:
-            raise ValueError(assert_error)
+            raise ExecutionConfigurationLoadError(f"{assert_error}")
         except KeyError as key_error:
-            raise ValueError(f"Erro de busca de config: {key_error}")
+            raise ExecutionConfigurationLoadError(f"Erro de busca de config: {key_error}")
 
     def load_storage_config(self):
         storage_config = self.config.get("storage", None)
