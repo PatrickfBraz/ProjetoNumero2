@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>src.settings.configLoader API documentation</title>
+<meta name="description" content="Este modulo possui a classe responsável pela leitura em tempo de execução das configurações passadas pelo usuário." />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.settings.configLoader</code></h1>
+</header>
+<section id="section-intro">
+<p>Este modulo possui a classe responsável pela leitura em tempo de execução das configurações passadas pelo usuário.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Este modulo possui a classe responsável pela leitura em tempo de execução das configurações passadas pelo usuário.
+&#34;&#34;&#34;
+import os
+import json
+from src.error.error_types import ExecutionConfigurationLoadError
+
+
+class ConfigLoader:
+    &#34;&#34;&#34;
+    Esta classe é responsável por ler o arquivo de parametros de execução e criar as variaveis de ambiente as quais
+    serão utilizadas para a configuração da execução do código.
+    A lógica de leitura de cada chave no nó principal do json estará separada em métodos. Estas lógicas serão disparadas
+    pelo método principal (Load).
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        with open(os.path.join(os.curdir, &#34;parameters.json&#34;), mode=&#39;r&#39;) as json_config:
+            self.config = json.load(json_config)
+
+    def load_config(self):
+        try:
+            self.load_logger_config()
+            self.load_storage_config()
+            self.load_scraper_config()
+            # self.load_database_config()
+
+        # todo importar modulo de tratamento de erros
+        except AssertionError as assert_error:
+            raise ExecutionConfigurationLoadError(f&#34;{assert_error}&#34;)
+        except KeyError as key_error:
+            raise ExecutionConfigurationLoadError(f&#34;Erro de busca de config: {key_error}&#34;)
+        except RuntimeError as run_time_error:
+            raise ExecutionConfigurationLoadError(f&#34;Erro de especificação de config: {run_time_error}&#34;)
+
+    def load_storage_config(self):
+        storage_config = self.config.get(&#34;storage&#34;, None)
+        if storage_config:
+            dataExtension = storage_config.get(&#34;dataExtension&#34;)
+            if dataExtension:
+                os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = dataExtension
+            else:
+                os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = &#34;CSV&#34;
+
+            encoding = storage_config.get(&#34;encoding&#34;)
+            if encoding:
+                os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = dataExtension
+            else:
+                os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = &#34;utf-8&#34;
+
+            remote = storage_config.get(&#34;remote&#34;)
+            if remote:
+                bucket = storage_config.get(&#34;s3&#34;).get(&#34;bucket&#34;)
+                key = storage_config.get(&#34;s3&#34;).get(&#34;key&#34;)
+                access_key = storage_config.get(&#34;s3&#34;).get(&#34;accessKey&#34;)
+                secret_key = storage_config.get(&#34;s3&#34;).get(&#34;secretKey&#34;)
+                localPath = storage_config.get(&#34;s3&#34;).get(&#34;acessDenyConfig&#34;).get(&#34;path&#34;)
+
+                assert access_key is not None, &#34;Não foi possivel carregar informaçeõs de acesso ao S3: (access_key)&#34;
+                assert secret_key is not None, &#34;Não foi possivel carregar informaçeõs de acesso ao S3: (secret_key)&#34;
+
+                os.environ[&#34;STORAGE_S3_BUCKET&#34;] = bucket
+                os.environ[&#34;STORAGE_S3_KEY&#34;] = key
+                os.environ[&#34;STORAGE_S3_ACCESS_KEY&#34;] = access_key
+                os.environ[&#34;STORAGE_S3_SECRET_KEY&#34;] = secret_key
+                os.environ[&#34;STORAGE_S3_ACCESS_DENNY_PATH&#34;] = localPath
+
+            else:
+                localPath = storage_config.get(&#34;localPath&#34;)
+                if localPath:
+                    os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = localPath
+                else:
+                    os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = &#34;/tmp/&#34;
+        else:
+
+            os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = &#34;/tmp/&#34;
+            os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = &#34;CSV&#34;
+            os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = &#34;utf-8&#34;
+
+    def load_logger_config(self):
+        # todo definir o padrao de formato
+        logger_config = self.config.get(&#34;logger&#34;)
+        if logger_config:
+            logger_format = logger_config.get(&#34;format&#34;)
+            if logger_format:
+                os.environ[&#34;LOGGER_FORMAT&#34;] = logger_format
+            else:
+                os.environ[&#34;LOGGER_FORMAT&#34;] = &#34;&#34;
+
+            logger_level = logger_config.get(&#34;level&#34;)
+            if logger_level:
+                os.environ[&#34;LOGGER_LEVEL&#34;] = logger_level
+            else:
+                os.environ[&#34;LOGGER_LEVEL&#34;] = &#34;INFO&#34;
+
+            logger_storage_active = logger_config.get(&#34;storage&#34;).get(&#34;active&#34;)
+            if logger_storage_active:
+                logger_storage_path = logger_config.get(&#34;storage&#34;).get(&#34;local&#34;).get(&#34;path&#34;)
+                if logger_storage_path:
+                    os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = logger_storage_path
+                else:
+                    os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = &#34;/tmp/&#34;
+        else:
+
+            os.environ[&#34;LOGGER_LEVEL&#34;] = &#34;INFO&#34;
+            os.environ[&#34;LOGGER_FORMAT&#34;] = &#34;&#34;
+            os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = &#34;/tmp/&#34;
+
+    def load_scraper_config(self):
+        scraper_config = self.config.get(&#34;scraper&#34;)
+
+        if scraper_config:
+            request_timeout = scraper_config.get(&#34;requestTimeout&#34;)
+            if request_timeout:
+                os.environ[&#34;SCRAPER_REQUEST_TIMEOUT&#34;] = request_timeout
+            else:
+                os.environ[&#34;SCRAPER_REQUEST_TIMEOUT&#34;] = &#34;30&#34;
+
+            max_retries = scraper_config.get(&#34;maxRetries&#34;)
+            if max_retries:
+                os.environ[&#34;SCRAPER_MAX_RETRIES&#34;] = max_retries
+            else:
+                os.environ[&#34;SCRAPER_MAX_RETRIES&#34;] = &#34;3&#34;
+
+            scraper_engine = scraper_config.get(&#34;scraperEngine&#34;)
+            assert scraper_engine is not None, &#34;É necessario informar o modulo de extração que será executado&#34;
+            os.environ[&#34;SCRAPER_ENGINE&#34;] = scraper_engine
+        else:
+            raise RuntimeError(&#34;É obrigatorio configurar a execução do scraper&#34;)
+
+    def load_database_config(self):
+        # todo terminar definicoes de configuracao de database
+        pass</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.settings.configLoader.ConfigLoader"><code class="flex name class">
+<span>class <span class="ident">ConfigLoader</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Esta classe é responsável por ler o arquivo de parametros de execução e criar as variaveis de ambiente as quais
+serão utilizadas para a configuração da execução do código.
+A lógica de leitura de cada chave no nó principal do json estará separada em métodos. Estas lógicas serão disparadas
+pelo método principal (Load).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ConfigLoader:
+    &#34;&#34;&#34;
+    Esta classe é responsável por ler o arquivo de parametros de execução e criar as variaveis de ambiente as quais
+    serão utilizadas para a configuração da execução do código.
+    A lógica de leitura de cada chave no nó principal do json estará separada em métodos. Estas lógicas serão disparadas
+    pelo método principal (Load).
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        with open(os.path.join(os.curdir, &#34;parameters.json&#34;), mode=&#39;r&#39;) as json_config:
+            self.config = json.load(json_config)
+
+    def load_config(self):
+        try:
+            self.load_logger_config()
+            self.load_storage_config()
+            self.load_scraper_config()
+            # self.load_database_config()
+
+        # todo importar modulo de tratamento de erros
+        except AssertionError as assert_error:
+            raise ExecutionConfigurationLoadError(f&#34;{assert_error}&#34;)
+        except KeyError as key_error:
+            raise ExecutionConfigurationLoadError(f&#34;Erro de busca de config: {key_error}&#34;)
+        except RuntimeError as run_time_error:
+            raise ExecutionConfigurationLoadError(f&#34;Erro de especificação de config: {run_time_error}&#34;)
+
+    def load_storage_config(self):
+        storage_config = self.config.get(&#34;storage&#34;, None)
+        if storage_config:
+            dataExtension = storage_config.get(&#34;dataExtension&#34;)
+            if dataExtension:
+                os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = dataExtension
+            else:
+                os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = &#34;CSV&#34;
+
+            encoding = storage_config.get(&#34;encoding&#34;)
+            if encoding:
+                os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = dataExtension
+            else:
+                os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = &#34;utf-8&#34;
+
+            remote = storage_config.get(&#34;remote&#34;)
+            if remote:
+                bucket = storage_config.get(&#34;s3&#34;).get(&#34;bucket&#34;)
+                key = storage_config.get(&#34;s3&#34;).get(&#34;key&#34;)
+                access_key = storage_config.get(&#34;s3&#34;).get(&#34;accessKey&#34;)
+                secret_key = storage_config.get(&#34;s3&#34;).get(&#34;secretKey&#34;)
+                localPath = storage_config.get(&#34;s3&#34;).get(&#34;acessDenyConfig&#34;).get(&#34;path&#34;)
+
+                assert access_key is not None, &#34;Não foi possivel carregar informaçeõs de acesso ao S3: (access_key)&#34;
+                assert secret_key is not None, &#34;Não foi possivel carregar informaçeõs de acesso ao S3: (secret_key)&#34;
+
+                os.environ[&#34;STORAGE_S3_BUCKET&#34;] = bucket
+                os.environ[&#34;STORAGE_S3_KEY&#34;] = key
+                os.environ[&#34;STORAGE_S3_ACCESS_KEY&#34;] = access_key
+                os.environ[&#34;STORAGE_S3_SECRET_KEY&#34;] = secret_key
+                os.environ[&#34;STORAGE_S3_ACCESS_DENNY_PATH&#34;] = localPath
+
+            else:
+                localPath = storage_config.get(&#34;localPath&#34;)
+                if localPath:
+                    os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = localPath
+                else:
+                    os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = &#34;/tmp/&#34;
+        else:
+
+            os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = &#34;/tmp/&#34;
+            os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = &#34;CSV&#34;
+            os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = &#34;utf-8&#34;
+
+    def load_logger_config(self):
+        # todo definir o padrao de formato
+        logger_config = self.config.get(&#34;logger&#34;)
+        if logger_config:
+            logger_format = logger_config.get(&#34;format&#34;)
+            if logger_format:
+                os.environ[&#34;LOGGER_FORMAT&#34;] = logger_format
+            else:
+                os.environ[&#34;LOGGER_FORMAT&#34;] = &#34;&#34;
+
+            logger_level = logger_config.get(&#34;level&#34;)
+            if logger_level:
+                os.environ[&#34;LOGGER_LEVEL&#34;] = logger_level
+            else:
+                os.environ[&#34;LOGGER_LEVEL&#34;] = &#34;INFO&#34;
+
+            logger_storage_active = logger_config.get(&#34;storage&#34;).get(&#34;active&#34;)
+            if logger_storage_active:
+                logger_storage_path = logger_config.get(&#34;storage&#34;).get(&#34;local&#34;).get(&#34;path&#34;)
+                if logger_storage_path:
+                    os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = logger_storage_path
+                else:
+                    os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = &#34;/tmp/&#34;
+        else:
+
+            os.environ[&#34;LOGGER_LEVEL&#34;] = &#34;INFO&#34;
+            os.environ[&#34;LOGGER_FORMAT&#34;] = &#34;&#34;
+            os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = &#34;/tmp/&#34;
+
+    def load_scraper_config(self):
+        scraper_config = self.config.get(&#34;scraper&#34;)
+
+        if scraper_config:
+            request_timeout = scraper_config.get(&#34;requestTimeout&#34;)
+            if request_timeout:
+                os.environ[&#34;SCRAPER_REQUEST_TIMEOUT&#34;] = request_timeout
+            else:
+                os.environ[&#34;SCRAPER_REQUEST_TIMEOUT&#34;] = &#34;30&#34;
+
+            max_retries = scraper_config.get(&#34;maxRetries&#34;)
+            if max_retries:
+                os.environ[&#34;SCRAPER_MAX_RETRIES&#34;] = max_retries
+            else:
+                os.environ[&#34;SCRAPER_MAX_RETRIES&#34;] = &#34;3&#34;
+
+            scraper_engine = scraper_config.get(&#34;scraperEngine&#34;)
+            assert scraper_engine is not None, &#34;É necessario informar o modulo de extração que será executado&#34;
+            os.environ[&#34;SCRAPER_ENGINE&#34;] = scraper_engine
+        else:
+            raise RuntimeError(&#34;É obrigatorio configurar a execução do scraper&#34;)
+
+    def load_database_config(self):
+        # todo terminar definicoes de configuracao de database
+        pass</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="src.settings.configLoader.ConfigLoader.load_config"><code class="name flex">
+<span>def <span class="ident">load_config</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_config(self):
+    try:
+        self.load_logger_config()
+        self.load_storage_config()
+        self.load_scraper_config()
+        # self.load_database_config()
+
+    # todo importar modulo de tratamento de erros
+    except AssertionError as assert_error:
+        raise ExecutionConfigurationLoadError(f&#34;{assert_error}&#34;)
+    except KeyError as key_error:
+        raise ExecutionConfigurationLoadError(f&#34;Erro de busca de config: {key_error}&#34;)
+    except RuntimeError as run_time_error:
+        raise ExecutionConfigurationLoadError(f&#34;Erro de especificação de config: {run_time_error}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.settings.configLoader.ConfigLoader.load_database_config"><code class="name flex">
+<span>def <span class="ident">load_database_config</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_database_config(self):
+    # todo terminar definicoes de configuracao de database
+    pass</code></pre>
+</details>
+</dd>
+<dt id="src.settings.configLoader.ConfigLoader.load_logger_config"><code class="name flex">
+<span>def <span class="ident">load_logger_config</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_logger_config(self):
+    # todo definir o padrao de formato
+    logger_config = self.config.get(&#34;logger&#34;)
+    if logger_config:
+        logger_format = logger_config.get(&#34;format&#34;)
+        if logger_format:
+            os.environ[&#34;LOGGER_FORMAT&#34;] = logger_format
+        else:
+            os.environ[&#34;LOGGER_FORMAT&#34;] = &#34;&#34;
+
+        logger_level = logger_config.get(&#34;level&#34;)
+        if logger_level:
+            os.environ[&#34;LOGGER_LEVEL&#34;] = logger_level
+        else:
+            os.environ[&#34;LOGGER_LEVEL&#34;] = &#34;INFO&#34;
+
+        logger_storage_active = logger_config.get(&#34;storage&#34;).get(&#34;active&#34;)
+        if logger_storage_active:
+            logger_storage_path = logger_config.get(&#34;storage&#34;).get(&#34;local&#34;).get(&#34;path&#34;)
+            if logger_storage_path:
+                os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = logger_storage_path
+            else:
+                os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = &#34;/tmp/&#34;
+    else:
+
+        os.environ[&#34;LOGGER_LEVEL&#34;] = &#34;INFO&#34;
+        os.environ[&#34;LOGGER_FORMAT&#34;] = &#34;&#34;
+        os.environ[&#34;LOGGER_STORAGE_PATH&#34;] = &#34;/tmp/&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.settings.configLoader.ConfigLoader.load_scraper_config"><code class="name flex">
+<span>def <span class="ident">load_scraper_config</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_scraper_config(self):
+    scraper_config = self.config.get(&#34;scraper&#34;)
+
+    if scraper_config:
+        request_timeout = scraper_config.get(&#34;requestTimeout&#34;)
+        if request_timeout:
+            os.environ[&#34;SCRAPER_REQUEST_TIMEOUT&#34;] = request_timeout
+        else:
+            os.environ[&#34;SCRAPER_REQUEST_TIMEOUT&#34;] = &#34;30&#34;
+
+        max_retries = scraper_config.get(&#34;maxRetries&#34;)
+        if max_retries:
+            os.environ[&#34;SCRAPER_MAX_RETRIES&#34;] = max_retries
+        else:
+            os.environ[&#34;SCRAPER_MAX_RETRIES&#34;] = &#34;3&#34;
+
+        scraper_engine = scraper_config.get(&#34;scraperEngine&#34;)
+        assert scraper_engine is not None, &#34;É necessario informar o modulo de extração que será executado&#34;
+        os.environ[&#34;SCRAPER_ENGINE&#34;] = scraper_engine
+    else:
+        raise RuntimeError(&#34;É obrigatorio configurar a execução do scraper&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.settings.configLoader.ConfigLoader.load_storage_config"><code class="name flex">
+<span>def <span class="ident">load_storage_config</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_storage_config(self):
+    storage_config = self.config.get(&#34;storage&#34;, None)
+    if storage_config:
+        dataExtension = storage_config.get(&#34;dataExtension&#34;)
+        if dataExtension:
+            os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = dataExtension
+        else:
+            os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = &#34;CSV&#34;
+
+        encoding = storage_config.get(&#34;encoding&#34;)
+        if encoding:
+            os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = dataExtension
+        else:
+            os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = &#34;utf-8&#34;
+
+        remote = storage_config.get(&#34;remote&#34;)
+        if remote:
+            bucket = storage_config.get(&#34;s3&#34;).get(&#34;bucket&#34;)
+            key = storage_config.get(&#34;s3&#34;).get(&#34;key&#34;)
+            access_key = storage_config.get(&#34;s3&#34;).get(&#34;accessKey&#34;)
+            secret_key = storage_config.get(&#34;s3&#34;).get(&#34;secretKey&#34;)
+            localPath = storage_config.get(&#34;s3&#34;).get(&#34;acessDenyConfig&#34;).get(&#34;path&#34;)
+
+            assert access_key is not None, &#34;Não foi possivel carregar informaçeõs de acesso ao S3: (access_key)&#34;
+            assert secret_key is not None, &#34;Não foi possivel carregar informaçeõs de acesso ao S3: (secret_key)&#34;
+
+            os.environ[&#34;STORAGE_S3_BUCKET&#34;] = bucket
+            os.environ[&#34;STORAGE_S3_KEY&#34;] = key
+            os.environ[&#34;STORAGE_S3_ACCESS_KEY&#34;] = access_key
+            os.environ[&#34;STORAGE_S3_SECRET_KEY&#34;] = secret_key
+            os.environ[&#34;STORAGE_S3_ACCESS_DENNY_PATH&#34;] = localPath
+
+        else:
+            localPath = storage_config.get(&#34;localPath&#34;)
+            if localPath:
+                os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = localPath
+            else:
+                os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = &#34;/tmp/&#34;
+    else:
+
+        os.environ[&#34;STORAGE_LOCAL_PATH&#34;] = &#34;/tmp/&#34;
+        os.environ[&#34;STORAGE_DATA_EXTENSION&#34;] = &#34;CSV&#34;
+        os.environ[&#34;STORAGE_DATA_ENCODING&#34;] = &#34;utf-8&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.settings" href="index.html">src.settings</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.settings.configLoader.ConfigLoader" href="#src.settings.configLoader.ConfigLoader">ConfigLoader</a></code></h4>
+<ul class="">
+<li><code><a title="src.settings.configLoader.ConfigLoader.load_config" href="#src.settings.configLoader.ConfigLoader.load_config">load_config</a></code></li>
+<li><code><a title="src.settings.configLoader.ConfigLoader.load_database_config" href="#src.settings.configLoader.ConfigLoader.load_database_config">load_database_config</a></code></li>
+<li><code><a title="src.settings.configLoader.ConfigLoader.load_logger_config" href="#src.settings.configLoader.ConfigLoader.load_logger_config">load_logger_config</a></code></li>
+<li><code><a title="src.settings.configLoader.ConfigLoader.load_scraper_config" href="#src.settings.configLoader.ConfigLoader.load_scraper_config">load_scraper_config</a></code></li>
+<li><code><a title="src.settings.configLoader.ConfigLoader.load_storage_config" href="#src.settings.configLoader.ConfigLoader.load_storage_config">load_storage_config</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

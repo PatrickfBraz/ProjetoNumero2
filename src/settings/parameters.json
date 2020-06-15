@@ -1,21 +1,11 @@
 {
   "storage": {
-    "dataExtension": "JSON | CSV",
+    "dataExtension": "CSV",
     "encoding": "utf-8",
     "remote": false,
     "localPath": "/tmp/",
-    "s3": {
-      "bucket": "",
-      "key": "",
-      "acessKey": "",
-      "secretKey": "",
-      "acessDenyConfig": {
-        "saveLocal": true,
-        "path": "/tmp/"
-      }
-    }
+    "storageEngine": "csvGenerator"
   },
-  "database": {},
   "logger": {
     "storage": {
       "active": false,
@@ -23,11 +13,12 @@
         "path": "/tmp/"
       }
     },
-    "format": "",
-    "level": "INFO"
+    "format": "{\"timestamp\": \"%(asctime)s\", \"level\": \"%(levelname)s\",\"location\": \"%(module)s:%(lineno)d\", \"message\": \"%(message)s\"}",
+    "level": "DEBUG"
   },
   "scraper": {
     "requestTimeout": 30,
-    "maxRetries": 3
+    "maxRetries": 3,
+    "scraperEngine": "httpScraper"
   }
 }

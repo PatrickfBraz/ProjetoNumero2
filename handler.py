@@ -4,6 +4,7 @@ Este módulo contem a função principal responsável por coordenar as demais ch
 from src.settings.configLoader import ConfigLoader
 from src.error.error_types import *
 from src.logger.loggerConfig import CustomLogger
+from src.core.scraper.httpScraperAbstract import initialize_scraper_engine
 import os
 import time
 import json
@@ -24,18 +25,21 @@ def handler(event=None, context=None):
     :return: Não possui retorno definido
     """
     try:
-        ConfigLoader().load_config()
-
+        loader = ConfigLoader("./src/settings/parameters.json")
+        loader.load_config()
         logger = CustomLogger().get_logger()
-        logger.debug("Logger Iniciado")
-
-        logger.debug("Verificando configurações de ambiente carregadas")
-        for key, value in os.environ:
-            if key.find("LOGGER") >= 0 or key.find("STORAGE") >= 0 or key.find("SCRAPER") >= 0:
+        logger.info("Logger Iniciado")
+        logger.info("Verificando configurações de ambiente carregadas")
+        for key in loader.get_environ_keys():
+            if os.environ.get(key, None):
+                value = os.environ.get(key)
                 logger.debug("{key} = {value}".format_map({"key": key, "value": value}))
 
-        logger.info("Fazendo chamada para o scrapper")
+        logger.info("Fazendo chamada para o scraper")
         # todo implementar scraper
+        initialize_scraper_engine(logger=logger)
+        logger.info("Handler executado com sucesso!")
+        return
 
     except ExecutionConfigurationLoadError as load_config_error:
         # A mensagem é mostrada desta forma pois o logger só é definido após carregamento das configurações

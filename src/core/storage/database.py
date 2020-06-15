@@ -1,3 +1,0 @@
-"""
-Modulo não implementado
-"""
